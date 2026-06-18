@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="world1">
+    <static>true</static>
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://world1/meshes/world1.glb</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+       <pose>0 0 -3 1.5708 0 0</pose>
+        <geometry>
+          <box><size>10 10 0.01</size></box>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="testworldo2">
+    <!-- Core systems — without these nothing in the world simulates or
+         publishes sensor data. The Sensors system is what actually drives
+         the thermal camera; it needs ogre2 since the thermal camera only
+         renders on the ogre2 backend. -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
+    <plugin filename="gz-sim-air-pressure-system" name="gz::sim::systems::AirPressure" />
+    <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer" />
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat" />
+
+
+    <!-- Physics — required rate for PX4 sensor integration.
+         "ode" isn't a valid gz-physics engine (that's a Gazebo Classic
+         name) — "ignored" tells Gazebo to use its default engine
+         (dartsim), same as PX4's stock worlds. -->
+    <physics name="4ms" type="ignored">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>50</real_time_update_rate>
+    </physics>
+    <!-- Required by PX4 sensor plugins via server.config -->
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <!-- GPS home position — required for NavSat/GPS sensor -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg>8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+    <!-- Sky -->
+    <scene>
+      <sky>
+        <time>10</time>
+        <sunrise>6</sunrise>
+        <sunset>20</sunset>
+        <clouds>
+          <speed>12</speed>
+          <direction>1.57</direction>
+          <humidity>0.5</humidity>
+          <mean_size>0.5</mean_size>
+          <ambient>0.8 0.8 0.8 1</ambient>
+        </clouds>
+      </sky>
+      <ambient>0.4 0.5 0.6 1</ambient>
+      <background>0.53 0.81 0.92 1</background>
+    </scene>
+    <!-- Sun -->
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+      <attenuation>
+        <range>2000</range>
+        <linear>0</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+    </light>
+    <include>
+      <uri>model://world1</uri>
+      <name>groundd</name>
+      <pose>0 0 1 1.5708 0 0</pose>
+    </include>
+    <include>
+      <uri>model://fire_ani</uri>
+      <name>fire1</name>
+      <pose>11 -1.5 1 0.3 0 0</pose>
+    </include>
+    <include>
+      <uri>model://fire_ani</uri>
+      <name>fire2</name>
+      <pose>11.3 -1.3 3 -0.4 0 0</pose>
+    </include>
+    <include>
+      <uri>model://fire_ani</uri>
+      <name>fire3</name>
+      <pose>10.7 -1.7 5 0.5 0 0</pose>
+    </include>
+    <include>
+      <uri>model://fire_ani</uri>
+      <name>fire4</name>
+      <pose>11.2 -1.2 7 -0.3 0 0</pose>
+    </include>
+    <include>
+      <uri>model://fire_ani</uri>
+      <name>fire5</name>
+      <pose>10.8 -1.8 9 0.6 0 0</pose>
+    </include>
+    <include>
+      <uri>model://fire_ani</uri>
+      <name>fire6</name>
+      <pose>11 -1.5 8.8 -0.5 0 0</pose>
+    </include>
+  </world>
+</sdf>

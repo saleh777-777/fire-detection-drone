@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="fire_ani">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://fire_ani/meshes/flame-21.stl</uri>
+            <scale>0.01 0.01 0.01</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1.0 0.3 0.0 0.5</ambient>
+          <diffuse>1.0 0.2 0.0 0.5</diffuse>
+          <specular>0.3 0.1 0.0 0.3</specular>
+          <emissive>0.2 0.05 0.0 0.2</emissive>
+        </material>
+        <transparency>0.3</transparency>
+        <plugin
+            filename="gz-sim-thermal-system"
+            name="gz::sim::systems::Thermal">
+          <temperature>1200</temperature>
+        </plugin>
+      </visual>
+    </link>
+  </model>
+</sdf>
